@@ -15,7 +15,7 @@ const { validateLogin, validateRegister } = require('./utils/validators/userVali
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./utils/cors');
 
-const { PORT = 3001, MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
+const { PORT = 3000, MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
 
 const app = express();
 
