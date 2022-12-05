@@ -23,7 +23,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validate: (value) => validator.isURL(value, { protocols: ['http', 'https'], require_protocol: true }),
+      validate: (v) => validator.isURL(v, { protocols: ['http', 'https'], require_protocol: true }),
       message: ({ value }) => `${value} - URL address is not valid. Expected URL address format: http(s)://(www).site.com`,
     },
   },
@@ -31,7 +31,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validate: (value) => validator.isURL(value, { protocols: ['http', 'https'], require_protocol: true }),
+      validate: (v) => validator.isURL(v, { protocols: ['http', 'https'], require_protocol: true }),
       message: ({ value }) => `${value} - URL address is not valid. Expected URL address format: http(s)://(www).site.com`,
     },
   },
@@ -39,7 +39,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validate: (value) => validator.isURL(value, { protocols: ['http', 'https'], require_protocol: true }),
+      validate: (v) => validator.isURL(v, { protocols: ['http', 'https'], require_protocol: true }),
       message: ({ value }) => `${value} - URL address is not valid. Expected URL address format: http(s)://(www).site.com`,
     },
   },
