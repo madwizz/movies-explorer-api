@@ -5,7 +5,7 @@ const ForbiddenError = require('../utils/classErrors/ForbiddenError');
 
 module.exports.getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({});
+    const movies = await Movie.find({ owner: req.user._id });
     res.send(movies);
   } catch (error) {
     next(error);
@@ -28,12 +28,12 @@ module.exports.createMovie = async (req, res, next) => {
 
 module.exports.deleteMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.findById(req.params.cardId);
+    const movie = await Movie.findById(req.params._id);
     if (!movie) {
       throw new NotFoundError('Movie is not found');
     }
     if (req.user._id === movie.owner.toString()) {
-      await Movie.findByIdAndDelete(req.params.cardId);
+      await Movie.findByIdAndDelete(req.params._id);
       return res.send({ message: 'Movie has been deleted' });
     }
     throw new ForbiddenError('It is not allowed to delete movies which you did not create');

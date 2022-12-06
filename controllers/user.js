@@ -11,7 +11,7 @@ const { getJWT } = require('../utils/getJWT');
 module.exports.getMe = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await User.findById({ _id: id });
     if (!user) {
       throw new NotFoundError('User with that id is not found');
     }
