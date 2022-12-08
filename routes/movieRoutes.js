@@ -7,8 +7,8 @@ const {
 } = require('../controllers/movie');
 const { validateMovieId, validateMovieInfo } = require('../utils/validators/movieValidator');
 
-movieRoutes.get('/movies', getMovies);
-movieRoutes.post('/movies', validateMovieInfo, createMovie);
-movieRoutes.delete('/movies/:_id', validateMovieId, deleteMovie);
+movieRoutes.get('/', getMovies);
+movieRoutes.post('/', validateMovieInfo, createMovie);
+movieRoutes.delete('/:_id', validateMovieId, deleteMovie);
 
 module.exports = movieRoutes;
