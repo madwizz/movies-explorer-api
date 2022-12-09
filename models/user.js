@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 const UnauthorizedError = require('../utils/classErrors/UnauthorizedError');
+const [
+  INVALID_DATA_ERROR,
+  INVALID_EMAIL,
+  INVALID_PASSWORD,
+] = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -10,7 +15,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: (value) => validator.isEmail(value),
-      message: () => 'Email is incorrect',
+      message: () => INVALID_DATA_ERROR,
     },
   },
   password: {
@@ -31,16 +36,16 @@ userSchema.statics.findUser = async function (email, password) {
   try {
     user = await this.findOne({ email }).select('+password');
   } catch (error) {
-    return Promise.reject(new UnauthorizedError('Wrong email: this email does not exist'));
+    return Promise.reject(new UnauthorizedError(INVALID_EMAIL));
   }
 
   try {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      throw new UnauthorizedError('Wrong password');
+      throw new UnauthorizedError(INVALID_PASSWORD);
     }
   } catch (error) {
-    return Promise.reject(new UnauthorizedError('Wrong password'));
+    return Promise.reject(new UnauthorizedError(INVALID_PASSWORD));
   }
   return user;
 };

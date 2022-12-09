@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema } = require('mongoose');
+const [
+  EXPECTED_URL,
+] = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -24,7 +27,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v, { protocols: ['http', 'https'], require_protocol: true }),
-      message: ({ value }) => `${value} - URL address is not valid. Expected URL address format: http(s)://(www).site.com`,
+      message: ({ value }) => `${value} - ${EXPECTED_URL}`,
     },
   },
   trailerLink: {
@@ -32,7 +35,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v, { protocols: ['http', 'https'], require_protocol: true }),
-      message: ({ value }) => `${value} - URL address is not valid. Expected URL address format: http(s)://(www).site.com`,
+      message: ({ value }) => `${value} - ${EXPECTED_URL}`,
     },
   },
   thumbnail: {
@@ -40,7 +43,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v, { protocols: ['http', 'https'], require_protocol: true }),
-      message: ({ value }) => `${value} - URL address is not valid. Expected URL address format: http(s)://(www).site.com`,
+      message: ({ value }) => `${value} - ${EXPECTED_URL}`,
     },
   },
   owner: {

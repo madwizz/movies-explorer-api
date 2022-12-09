@@ -1,1 +1,15 @@
 module.exports.URL_REGEXP = /https?:\/\/(www\.)?[-a-zA-Z0-9]{1,256}\.[a-zA-Z0-9]{1,6}\b([-a-zA-Z0-9]*)/;
+module.exports.INVALID_DATA_ERROR = 'Invalid data is received';
+module.exports.MOVIE_NOT_FOUND_ERROR = 'Movie is not found';
+module.exports.FORBIDDEN_DELETE_MOVIE_ERROR = 'It is not allowed to delete movies which you did not create';
+module.exports.MOVIE_ID_VALIDATION_ERROR = 'Movie _id is not valid';
+module.exports.USER_NOT_FOUND_ERROR = 'User with that id is not found';
+module.exports.USER_ID_VALIDATION_ERROR = 'Invalid user id format';
+module.exports.USER_REGISTERED_ERROR = 'User with that email already exists';
+module.exports.USER_CREATED_MESSAGE = 'User was successfully created';
+module.exports.MOVIE_DELETED_MESSAGE = 'Movie has been deleted';
+module.exports.AUTH_REQUIRED = 'Authorization is required';
+module.exports.EXPECTED_URL = 'URL address is not valid. Expected URL address format: http(s)://(www).site.com';
+module.exports.INVALID_EMAIL = 'Wrong email: this email does not exist';
+module.exports.INVALID_PASSWORD = 'Wrong password';
+module.exports.REQUEST_URL_NOT_FOUND = 'URL is not found. Check URL and request method';

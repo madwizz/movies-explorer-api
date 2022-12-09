@@ -1,4 +1,11 @@
 const Movie = require('../models/movie');
+const [
+  INVALID_DATA_ERROR,
+  MOVIE_NOT_FOUND_ERROR,
+  FORBIDDEN_DELETE_MOVIE_ERROR,
+  MOVIE_ID_VALIDATION_ERROR,
+  MOVIE_DELETED_MESSAGE,
+] = require('../utils/constants');
 const BadRequestError = require('../utils/classErrors/BadRequestError');
 const NotFoundError = require('../utils/classErrors/NotFoundError');
 const ForbiddenError = require('../utils/classErrors/ForbiddenError');
@@ -18,7 +25,7 @@ module.exports.createMovie = async (req, res, next) => {
     res.send(movie);
   } catch (error) {
     if (error.name === 'ValidationError') {
-      next(new BadRequestError('Invalid data is received'));
+      next(new BadRequestError(INVALID_DATA_ERROR));
     } else {
       next(error);
     }
@@ -29,16 +36,16 @@ module.exports.deleteMovie = async (req, res, next) => {
   try {
     const movie = await Movie.findById(req.params._id);
     if (!movie) {
-      throw new NotFoundError('Movie is not found');
+      throw new NotFoundError(MOVIE_NOT_FOUND_ERROR);
     }
     if (req.user._id === movie.owner.toString()) {
       await Movie.findByIdAndDelete(req.params._id);
-      return res.send({ message: 'Movie has been deleted' });
+      return res.send(MOVIE_DELETED_MESSAGE);
     }
-    throw new ForbiddenError('It is not allowed to delete movies which you did not create');
+    throw new ForbiddenError(FORBIDDEN_DELETE_MOVIE_ERROR);
   } catch (error) {
     if (error.name === 'CastError') {
-      return next(new BadRequestError('Movie _id is not valid'));
+      return next(new BadRequestError(MOVIE_ID_VALIDATION_ERROR));
     }
     return next(error);
   }

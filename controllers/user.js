@@ -5,6 +5,13 @@ const BadRequestError = require('../utils/classErrors/BadRequestError');
 const MatchedError = require('../utils/classErrors/MatchedError');
 const NotFoundError = require('../utils/classErrors/NotFoundError');
 const { MONGO_DB_CODE } = require('../utils/errors');
+const [
+  USER_NOT_FOUND_ERROR,
+  USER_ID_VALIDATION_ERROR,
+  USER_REGISTERED_ERROR,
+  INVALID_DATA_ERROR,
+  USER_CREATED_MESSAGE,
+] = require('../utils/constants');
 
 const { getJWT } = require('../utils/getJWT');
 
@@ -13,12 +20,12 @@ module.exports.getMe = async (req, res, next) => {
     const id = req.user._id;
     const user = await User.findById({ _id: id });
     if (!user) {
-      throw new NotFoundError('User with that id is not found');
+      throw new NotFoundError(USER_NOT_FOUND_ERROR);
     }
     return res.send(user);
   } catch (error) {
     if (error.name === 'CastError') {
-      return next(new BadRequestError('Invalid user id format'));
+      return next(new BadRequestError(USER_ID_VALIDATION_ERROR));
     }
     return next(error);
   }
@@ -33,14 +40,12 @@ module.exports.createUser = async (req, res, next) => {
     await User.create({
       name, email, password: hash,
     });
-    res.send({
-      message: 'User was successfully created',
-    });
+    res.send(USER_CREATED_MESSAGE);
   } catch (error) {
     if (error.code === MONGO_DB_CODE) {
-      next(new MatchedError('User with that email already exists'));
+      next(new MatchedError(USER_REGISTERED_ERROR));
     } else if (error.name === 'ValidationError') {
-      next(new BadRequestError('Invalid data is received: validation error'));
+      next(new BadRequestError(INVALID_DATA_ERROR));
     } else {
       next(error);
     }
