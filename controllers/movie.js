@@ -1,11 +1,11 @@
 const Movie = require('../models/movie');
-const [
+const {
   INVALID_DATA_ERROR,
   MOVIE_NOT_FOUND_ERROR,
   FORBIDDEN_DELETE_MOVIE_ERROR,
   MOVIE_ID_VALIDATION_ERROR,
   MOVIE_DELETED_MESSAGE,
-] = require('../utils/constants');
+} = require('../utils/constants');
 const BadRequestError = require('../utils/classErrors/BadRequestError');
 const NotFoundError = require('../utils/classErrors/NotFoundError');
 const ForbiddenError = require('../utils/classErrors/ForbiddenError');
