@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema } = require('mongoose');
-const [
+const {
   EXPECTED_URL,
-] = require('../utils/constants');
+} = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {

@@ -5,7 +5,13 @@ const BadRequestError = require('../utils/classErrors/BadRequestError');
 const MatchedError = require('../utils/classErrors/MatchedError');
 const NotFoundError = require('../utils/classErrors/NotFoundError');
 const { MONGO_DB_CODE } = require('../utils/errors');
-const [USER_NOT_FOUND_ERROR, USER_ID_VALIDATION_ERROR, USER_REGISTERED_ERROR, INVALID_DATA_ERROR, USER_CREATED_MESSAGE] = require('../utils/constants');
+const {
+  USER_NOT_FOUND_ERROR,
+  USER_ID_VALIDATION_ERROR,
+  USER_REGISTERED_ERROR,
+  INVALID_DATA_ERROR,
+  USER_CREATED_MESSAGE,
+} = require('../utils/constants');
 
 const { getJWT } = require('../utils/getJWT');
 

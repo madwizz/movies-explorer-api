@@ -5,9 +5,9 @@ const movieRoutes = require('./movieRoutes');
 const auth = require('../middlewares/auth');
 const { login, createUser } = require('../controllers/user');
 const NotFoundError = require('../utils/classErrors/NotFoundError');
-const [
+const {
   REQUEST_URL_NOT_FOUND,
-] = require('../utils/constants');
+} = require('../utils/constants');
 const { validateLogin, validateRegister } = require('../utils/validators/userValidator');
 
 routes.post('/signin', validateLogin, login);
