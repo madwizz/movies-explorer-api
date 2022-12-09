@@ -17,7 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 bitfilmsdb.connect(MONGO_URL);
 app.use(requestLogger);
-app.use(rateLimit);
+// app.use(rateLimit);
 app.use(helmet());
 app.use(cors);
 app.use(routes);
