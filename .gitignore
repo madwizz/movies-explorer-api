@@ -23,6 +23,7 @@ node_modules
 
 # testing
 /coverage
+test.js
 
 # production
 /build
